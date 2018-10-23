@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{Title}{block:PostTitle} &#x1f7ca; {PostTitle}{/block:PostTitle}</title>
+    <link rel="shortcut icon" href="{Favicon}">
+    {block:Description}
+        <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
+
+    <link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Domine|Tulpen+One|McLaren">
+    <link rel="stylesheet" href="https://static.tumblr.com/kjbncbj/oXupgzs22/style.min.css">
+
+    <!-- Theme Options -->
+    <meta name="text:Copyright Text" content="{Title}"/>
+
+    <style>
+        {CustomCSS}
+    </style>
+</head>
+
+<body>
+    <a class="screenreader" href="#content">Skip to content</a>
+    <div class="site__sidebar col-lg-4 col-sm-12 flex flex-col">
+        <header class="site__header flex flex-col" role="banner">
+            <a href="/">
+            <div class="header__titleportrait">
+                <h1 class="header__title">{Title}</h1>
+                {block:ShowAvatar}
+                    <img alt="{Title}'s avatar" src="{PortraitURL-128}" class="portrait portrait-{AvatarShape}">
+                {/block:ShowAvatar}
+            </div>
+            </a>
+            {block:ShowDescription}
+                {block:Description}
+                    <p class="header__desc">{Description}</p>
+                {/block:Description}
+            {/block:ShowDescription}
+            <nav class="nav__site" aria-label="Site navigation">
+                <ul>
+                    {block:HasPages}
+                    {block:Pages}
+                        <li><a href="{URL}">{Label}</a></li>
+                    {/block:Pages}
+                    {/block:HasPages}
+                    {block:AskEnabled}
+                        <li><a href="/ask">{AskLabel}</a></li>
+                    {/block:AskEnabled}
+                    {block:SubmissionsEnabled}
+                        <li><a href="/submit">{SubmitLabel}</a></li>
+                    {/block:SubmissionsEnabled}
+                </ul>
+            </nav>
+        </header>
+        <footer class="site__footer">
+            <p>&copy; {CopyrightYears} {text:Copyright Text}<span class="footer__credits"> &#x1f7ca; <a href="https://presto.blog/">Theme</a></span></p>
+        </footer>
+    </div>
+    <main id="content" class="site__main col-lg-8 col-sm-12">
+        <h1 class="{block:HomePage}hideme {/block:HomePage}main__heading">
+        {block:SearchPage}{SearchResultCount} results for "{SearchQuery}"{/block:SearchPage}
+        {block:TagPage}Posts tagged "{Tag}"{/block:TagPage}
+        {block:DayPage}Posts from {Month} {DayOfMonth}, {Year}{/block:DayPage}
+        </h1>
+        <ol id="main__posts">{block:Posts}
+            <li class="post post-{PostType}">
+                <article id="post-{PostID}">
+                    <div class="post__header flex flex-jbetween">
+                        <span class="post__type">{block:IndexPage}<a href="{Permalink}">{/block:IndexPage}{PostType}{block:IndexPage}</a>{/block:IndexPage}</span>
+                        <div class="post__actions">
+                            <span class="post__button" style="margin-right:.5em;">{LikeButton color="white"}</span>
+                            <span class="post__button">{ReblogButton color="white"}</span>
+                        </div>
+                    </div>
+                    <div class="post__content">
+                    {block:Text}
+                        {block:Title}<h2><a href="{Permalink}">{Title}</a></h2>{/block:Title}
+                        {Body}
+                    {/block:Text}
+                    {block:Panorama}
+                        <figure>
+                            {LinkOpenTag}
+                                <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}">
+                            {LinkCloseTag}
+                            {block:Caption}
+                                <figcaption>
+                                    {Caption}
+                                </figcaption>
+                            {/block:Caption}
+                        </figure>
+                    {/block:Panorama}
+                    {block:Photo}
+                        <figure>
+                            {LinkOpenTag}
+                                <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
+                            {LinkCloseTag}
+                            {block:Caption}
+                                <figcaption>
+                                    {Caption}
+                                </figcaption>
+                            {/block:Caption}
+                        </figure>
+                    {/block:Photo}
+                    {block:Photoset}
+                        <figure class="photoset photoset-{PhotosetLayout}">
+                            {block:Photos}
+                                <figure class="photoset__img photoset__img-{PhotosetLayout}">
+                                    <img alt="{PhotoAlt}" src="{PhotoURL-HighRes}" width="{PhotoWidth-HighRes}" />
+                                    {block:Caption}
+                                        <figcaption>
+                                            {Caption}
+                                        </figcaption>
+                                    {/block:Caption}
+                                </figure>
+                            {/block:Photos}
+                            {block:Caption}
+                                <figcaption class="photoset__caption">
+                                    {Caption}
+                                </figcaption>
+                            {/block:Caption}
+                        </figure>
+                    {/block:Photoset}
+                    {block:Quote}
+                        <blockquote>
+                            {Quote}
+                            {block:Source}
+                            <footer>
+                                <cite>{Source}</cite>
+                            </footer>
+                            {/block:Source}
+                        </blockquote>
+                    {/block:Quote}
+                    {block:Link}
+                        <a href="{URL}" target="{Target}">
+                            {block:Thumbnail}
+                                <img class="link__thumbnail" alt="" src="{Thumbnail-HighRes}">
+                            {/block:Thumbnail}
+                            <h2 class="post-link__title">{Name}</h2>
+                        </a>
+                        {block:Author}<h3 class="post-link__author">{Author}</h3>{/block:Author}
+                        {block:Excerpt}
+                            <p>{Exceprt}</p>
+                        {/block:Excerpt}
+                        {block:Description}
+                            <p>{Description}</p>
+                        {/block:Description}
+                    {/block:Link}
+                    {block:Chat}
+                        {block:Title}<h2>{Title}</h2>{/block:Title}
+                        <div class="chat__lines">
+                            {block:Lines}
+                                <p class="chat__line chat__line-{Alt}">{block:Label}<span class="chat__label"><strong>{Label}</strong></span> {/block:Label}{Line}</p>
+                            {/block:Lines}
+                        </div>
+                    {/block:Chat}
+                    {block:Audio}
+                        {block:AudioEmbed}
+                            {AudioEmbed-640}
+                        {/block:AudioEmbed}
+                        {block:Caption}{Caption}{/block:Caption}
+                    {/block:Audio}
+                    {block:Video}
+                        <figure>
+                            {VideoEmbed-700}
+                            {block:Caption}
+                                <figcaption>{Caption}</figcaption>
+                            {/block:Caption}
+                        </figure>
+                    {/block:Video}
+                    {block:Answer}
+                        <div class="post__original">
+                            <blockquote class="question">
+                                <footer class="question__user">
+                                    <img class="user__img" src="{AskerPortraitURL-30}" alt=""><cite>{Asker}</cite> asked:
+                                </footer>
+                                {Question}
+                            </blockquote>
+                            {block:Answerer}
+                                <blockquote class="answer">
+                                    <footer class="answer__user">
+                                        <img class="user__img" src="{AnswererPortraitURL-30}" alt=""><cite>{Answerer}</cite> answered:
+                                    </footer>
+                                    {Answer}
+                                </blockquote>
+                            {/block:Answerer}
+                        </div>
+                        <div class="post__response">
+                            {Replies}
+                        </div>
+                    {/block:Answer}
+                    </div>
+                    <footer class="post__footer">
+                        <div class="footer__meta flex flex-jbetween">
+                            <div class="footer__tags">
+                                {block:HasTags}
+                                    <ul class="post__tags">
+                                    {block:Tags}
+                                        <li class="post__tag">
+                                            <a href="{TagURLChrono}">{Tag}</a>
+                                        </li>
+                                    {/block:Tags}
+                                    </ul>
+                                {/block:HasTags}
+                            </div>
+                            <div class="footer__datenotecount">
+                                {block:Date}
+                                    <span class="footer__date"><time datetime="{Year}-{MonthNumber}-{DayOfMonth} {24Hour}:{Minutes}:{Seconds}.{Beats}">{ShortMonth} {DayOfMonth}{DayOfMonthSuffix}, {Year} @ {12Hour}:{Minutes}{AmPm}</time></span>
+                                {/block:Date}
+                                {block:NoteCount}
+                                    <span class="footer__notecount"><a href="{Permalink}">{NoteCountWithLabel}</a></span>
+                                {/block:NoteCount}
+                            </div>
+                        </div>
+                        {block:PostNotes}
+                            {PostNotes-16}
+                        {/block:PostNotes}
+                    </footer>
+                </article>
+            </li>
+        {/block:Posts}</ol><!-- #main__posts -->
+        {block:Pagination}
+            <nav class="nav__posts" aria-label="Posts navigation">
+                <h1 class="nav__posts__heading">Travel in Time</h1>
+                {block:PreviousPage}<a aria-label="See newer posts" class="nav__posts__link-prev" href="{PreviousPage}">&lt; Future</a>{/block:PreviousPage}
+                {block:JumpPagination length="5"}
+                    {block:CurrentPage}
+                        <span aria-current="page" class="nav__posts__link-current">{PageNumber}</span>
+                    {/block:CurrentPage}
+                    {block:JumpPage}
+                        <a class="nav__posts__link nav__posts__link-jump" href="{URL}">{PageNumber}</a>
+                    {/block:JumpPage}
+                {/block:JumpPagination}
+                {block:NextPage}<a aria-label="See older posts" class="nav__posts__link-next" href="{NextPage}">Past &gt;</a>{/block:NextPage}
+            </nav>
+        {/block:Pagination}
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var photosetPics = document.getElementsByClassName('photoset__img');
+            var imgOrCaption, caption, img, imgSrc, figId;
+            for ( var i = 0; i < photosetPics.length; i++ ) {
+                imgOrCaption = photosetPics[i].lastElementChild;
+                if ( imgOrCaption.nodeName.toLowerCase() === 'figcaption' ) {
+                    caption = imgOrCaption;
+                    img = photosetPics[i].firstElementChild;
+                    imgSrc = img.getAttribute('src');
+                    figId = {PostID} + '-' + imgSrc.substr( imgSrc.length - 10 );
+                    caption.setAttribute( 'id', figId );
+                    img.setAttribute( 'aria-labelledby', figId );
+                }
+            }
+            var postNotes = document.getElementsByClassName('note');
+            for ( var i = 0; i < postNotes.length; i++ ) {
+                if ( postNotes[i].firstElementChild.getAttribute('href') == '{BlogURL}' ) {
+                    postNotes[i].className += ' note-thisblog';
+                }
+            }
+        }, false);
+    </script>
+
+</body>
+</html>

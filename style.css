@@ -1,15 +1,17 @@
-/* Little Aspect Tumblr Theme
+/* Little Aspect Tumblr Theme v 1.0.1
 https://presto.blog/
 Licensed under the MIT License
 https://opensource.org/licenses/MIT */
 
 /* CSS Reset */
 html {
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 *, *:before, *:after {
-    box-sizing: inherit;
+    -webkit-box-sizing: inherit;
+            box-sizing: inherit;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -101,10 +103,22 @@ img {
             flex-direction: column;
 }
 
+.flex-aend {
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+}
+
 .flex-jbetween {
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
+}
+
+.flex-jcenter {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .flex-jend {
@@ -122,12 +136,9 @@ img {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#952557', endColorstr='#f58794',GradientType=0 );
     -webkit-box-shadow: 0 0 10px #0D0106;
             box-shadow: 0 0 10px #0D0106;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
-    -ms-flex-preferred-size: 33.33333333%;
-    flex-basis: 33.33333333%;
-    max-width: 33.33333333%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 2em;
     z-index: 1;
 }
@@ -164,6 +175,46 @@ img {
     position: absolute;
     text-align: center;
     width: 100%;
+}
+
+/* Forms */
+
+button,
+input[type="button"],
+input[type="submit"] {
+    cursor: pointer;
+}
+
+input {
+    font-family: 'McLaren', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+form button,
+input[type="button"],
+input[type="submit"] {
+    background: purple;
+    border: 0;
+    color: white;
+    font-size: .6em;
+}
+
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="url"] {
+    border: 0;
+    padding: .3em .5em;
+}
+
+.form-search .form__text {
+    border-radius: .3em 0 0 .3em;
+}
+
+.form-search .form__submit {
+    border-radius: 0 .3em .3em 0;
 }
 
 /* Typography */
@@ -265,7 +316,7 @@ p + p {
 }
 
 .header__title {
-    font-family: "Tulpen One", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Tulpen One', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 20vw;
     line-height: .7em;
     margin-bottom: .1em;
@@ -286,10 +337,11 @@ p + p {
 }
 
 .nav__site {
-    font-family: Tulpen One;
+    font-family: 'Tulpen One', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 2em;
     line-height: 1em;
     margin: .5em 0;
+    text-transform: capitalize;
 }
 
 .site__footer {
@@ -299,8 +351,8 @@ p + p {
 .main__heading {
     color: #f34aaa;
     font-size: 3em;
-    font-family: Tulpen One;
-    margin: 0 0 1em;
+    font-family: 'Tulpen One', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: .5em 0 .8em;
     text-align: center;
 }
 
@@ -310,9 +362,38 @@ p + p {
 }
 
 .nav__posts__heading {
-    font-family: Tulpen One;
+    font-family: 'Tulpen One', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 3em;
-    line-height: 1em;
+    line-height: 1.2em;
+}
+
+.nav__posts__link {
+    padding: 0 .4em;
+}
+
+.nav__posts__links div .nav__posts__link {
+    padding: 0 .2em;
+}
+
+.nav__posts__links div .nav__posts__link:visited {
+    color: #ffed28;
+}
+
+.nav__posts__links div .nav__posts__link:visited:focus,
+.nav__posts__link div .nav__posts__link:visited:hover {
+    color: #fff7b9;
+}
+
+.nav__posts__links-future,
+.nav__posts__links-past {
+    font-size: 1.4em;
+    display: inline;
+}
+
+.nav__posts__link-current {
+    background: #3e44ec;
+    color: #cecfff;
+    border-radius: 3em;
 }
 
 
@@ -399,6 +480,13 @@ p + p {
     display: inline;
 }
 
+.footer__datenotecount {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 40%;
+            flex: 0 0 40%;
+    text-align: right;
+}
+
 /* Posts: Answer */
 
 .question__user,
@@ -426,7 +514,7 @@ p + p {
 /* Posts: Embeds: */
 
 .link__thumbnail,
-.post-video .post__content iframe {
+.post__content iframe {
     width: 100%;
 }
 
@@ -471,17 +559,22 @@ p + p {
     text-align: center;
 }
 
-.photoset .photoset__img[class$="2"] {
+.photoset .photoset__fig[class$="2"] {
     display: inline-block;
     width: 49%;
 }
 
-.photoset__img {
-    margin: .5em 0;
+.photoset__fig {
     position: relative;
 }
 
-.photoset__img figcaption {
+.photo__img,
+.photoset__img {
+    display: block;
+    margin: 0 auto .5em;
+}
+
+.photoset__fig figcaption {
     background: #00000061;
     bottom: 8px;
     font-size: .8em;
@@ -551,6 +644,7 @@ p + p {
     .site__sidebar {
         height: 100%;
         position: fixed;
+        width: 33%;
     }
 
     .header__title {
@@ -599,7 +693,15 @@ p + p {
         width: 12vw;
     }
 
-    .photoset__img[class$="2"] img {
+    .nav__site__link {
+        display: inline;
+    }
+    
+    .nav__site__link:not(:last-child) {
+        margin-right: .3em;
+    }
+
+    .photoset__fig[class$="2"] img {
         min-width: 30vw;
     }
 }
@@ -619,5 +721,13 @@ p + p {
 
     .post {
         margin: 1em;
+    }
+
+    .footer__meta {
+        display: block;
+    }
+
+    .nav__posts {
+        bottom: -2em;
     }
 }

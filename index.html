@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html>
+{block:Hidden}
+<!-- Little Aspect Theme v. 1.0.1 -->
+<!-- https://github.com/prestobunny/little-aspect -->
+{/block:Hidden}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{Title}{block:PostTitle} &#x1f7ca; {PostTitle}{/block:PostTitle}</title>
-    <link rel="shortcut icon" href="{Favicon}">
-    {block:Description}
-        <meta name="description" content="{MetaDescription}" />
-    {/block:Description}
-
+    <title>{Title}{block:PermalinkPage}{block:PostSummary} &#x1f7ca; {PostSummary}{/block:PostSummary}{/block:PermalinkPage}{block:SearchPage} &#x1f7ca; {lang:Search results for SearchQuery}{/block:SearchPage}</title>
     <link rel="alternate" type="application/rss+xml" href="{RSS}">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Domine|Tulpen+One|McLaren">
-    <link rel="stylesheet" href="https://static.tumblr.com/kjbncbj/jpbph1a6c/style.min.css">
-
+    <link rel="shortcut icon" href="{Favicon}">
+    {block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+    {block:Hidden}
     <!-- Theme Options -->
-    <meta name="text:Copyright Text" content="{Title}"/>
-
+    <meta name="if:Show header image" content="1">
+    <meta name="if:Show Archive link" content="1">
+    <meta name="if:Show RSS link" content="0">
+    <meta name="if:Show Random link" content="0">
+    <meta name="if:Show search" content="1">
+    <meta name="text:Copyright text" content=""/>
+    <meta name="text:Post navigation title" content="Travel in Time"/>
+    {/block:Hidden}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Domine|Tulpen+One|McLaren">
+    <link rel="stylesheet" href="https://static.tumblr.com/kjbncbj/vvkpheby2/style.min.css">
+    <!-- HTML5 Shiv -->
+    <!--[if lt IE 9]>
+        <script src="http://static.tumblr.com/hriofhd/Qj0m8pn7q/html5shiv.js"></script>
+    <![endif]-->
     <style>
         {CustomCSS}
     </style>
@@ -26,7 +35,7 @@
 
 <body>
     <a class="screenreader" href="#content">Skip to content</a>
-    <div class="site__sidebar col-lg-4 col-sm-12 flex flex-col">
+    <div {block:IfShowHeaderImage}style="background-image:url({HeaderImage});"{/Block:IfShowHeaderImage} class="site__sidebar col-lg-4 col-sm-12 flex flex-col">
         <header class="site__header flex flex-col" role="banner">
             <a href="/">
             <div class="header__titleportrait">
@@ -41,28 +50,43 @@
                     <p class="header__desc">{Description}</p>
                 {/block:Description}
             {/block:ShowDescription}
-            <nav class="nav__site" aria-label="Site navigation">
+            <nav class="nav__site" aria-label="{lang:Pages}">
                 <ul>
                     {block:HasPages}
                     {block:Pages}
-                        <li><a href="{URL}">{Label}</a></li>
+                        <li class="nav__site__link"><a href="{URL}">{Label}</a></li>
                     {/block:Pages}
                     {/block:HasPages}
                     {block:AskEnabled}
-                        <li><a href="/ask">{AskLabel}</a></li>
+                        <li class="nav__site__link"><a href="/ask">{AskLabel}</a></li>
                     {/block:AskEnabled}
                     {block:SubmissionsEnabled}
-                        <li><a href="/submit">{SubmitLabel}</a></li>
+                        <li class="nav__site__link"><a href="/submit">{SubmitLabel}</a></li>
                     {/block:SubmissionsEnabled}
+                    {block:IfShowRandomLink}
+                        <li class="nav__site__link"><a href="/random">{lang:Random}</a></li>
+                    {/block:IfShowRandomLink}
+                    {block:IfShowArchiveLink}
+                        <li class="nav__site__link"><a href="/archive">{lang:Archive}</a></li>
+                    {/block:IfShowArchiveLink}
+                    {block:IfShowRSSLink}
+                        <li class="nav__site__link"><a href="/rss">{lang:RSS feed}</a></li>
+                    {/block:IfShowRSSLink}
                 </ul>
             </nav>
+            {block:IfShowSearch}
+                <form class="header__search form-search flex flex-jcenter" action="/search" method="get">
+                    <input class="form__text" type="search" name="q" value="{SearchQuery}"/>
+                    <input class="form__submit" type="submit" value="{lang:Search}"/>
+                </form>
+            {/block:IfShowSearch}
         </header>
         <footer class="site__footer">
-            <p>&copy; {CopyrightYears} {text:Copyright Text}<span class="footer__credits"> &#x1f7ca; <a href="https://presto.blog/">Theme</a></span></p>
+            <p>&copy; {CopyrightYears} {text:Copyright text}<span class="footer__credits"> &#x1f7ca; <a href="https://presto.blog/">Theme</a></span></p>
         </footer>
     </div>
     <main id="content" class="site__main col-lg-8 col-sm-12">
-        <h1 class="{block:HomePage}hideme {/block:HomePage}main__heading">
+        <h1 class="{block:PermalinkPage}hideme {/block:PermalinkPage}{block:HomePage}hideme {/block:HomePage}main__heading">
         {block:SearchPage}{SearchResultCount} results for "{SearchQuery}"{/block:SearchPage}
         {block:TagPage}Posts tagged "{Tag}"{/block:TagPage}
         {block:DayPage}Posts from {Month} {DayOfMonth}, {Year}{/block:DayPage}
@@ -79,7 +103,7 @@
                     </div>
                     <div class="post__content">
                     {block:Text}
-                        {block:Title}<h2><a href="{Permalink}">{Title}</a></h2>{/block:Title}
+                        {block:Title}<h2>{block:IndexPage}<a href="{Permalink}">{/block:IndexPage}{Title}{block:IndexPage}</a>{/block:IndexPage}</h2>{/block:Title}
                         {Body}
                     {/block:Text}
                     {block:Panorama}
@@ -95,9 +119,9 @@
                         </figure>
                     {/block:Panorama}
                     {block:Photo}
-                        <figure>
+                        <figure class="photo__fig">
                             {LinkOpenTag}
-                                <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
+                                <img class="photo__img" alt="{PhotoAlt}" src="{PhotoURL-HighRes}">
                             {LinkCloseTag}
                             {block:Caption}
                                 <figcaption>
@@ -109,8 +133,8 @@
                     {block:Photoset}
                         <figure class="photoset photoset-{PhotosetLayout}">
                             {block:Photos}
-                                <figure class="photoset__img photoset__img-{PhotosetLayout}">
-                                    <img alt="{PhotoAlt}" src="{PhotoURL-HighRes}" width="{PhotoWidth-HighRes}" />
+                                <figure class="photoset__fig photoset__fig-{PhotosetLayout}">
+                                    <img class="photoset__img" alt="{PhotoAlt}" src="{PhotoURL-HighRes}" width="{PhotoWidth-HighRes}" />
                                     {block:Caption}
                                         <figcaption>
                                             {Caption}
@@ -160,7 +184,7 @@
                     {/block:Chat}
                     {block:Audio}
                         {block:AudioEmbed}
-                            {AudioEmbed-640}
+                            {AudioEmbed}
                         {/block:AudioEmbed}
                         {block:Caption}{Caption}{/block:Caption}
                     {/block:Audio}
@@ -195,7 +219,7 @@
                     {/block:Answer}
                     </div>
                     <footer class="post__footer">
-                        <div class="footer__meta flex flex-jbetween">
+                        <div class="footer__meta flex flex-aend flex-jbetween">
                             <div class="footer__tags">
                                 {block:HasTags}
                                     <ul class="post__tags">
@@ -225,23 +249,41 @@
         {/block:Posts}</ol><!-- #main__posts -->
         {block:Pagination}
             <nav class="nav__posts" aria-label="Posts navigation">
-                <h1 class="nav__posts__heading">Travel in Time</h1>
-                {block:PreviousPage}<a aria-label="See newer posts" class="nav__posts__link-prev" href="{PreviousPage}">&lt; Future</a>{/block:PreviousPage}
-                {block:JumpPagination length="5"}
-                    {block:CurrentPage}
-                        <span aria-current="page" class="nav__posts__link-current">{PageNumber}</span>
-                    {/block:CurrentPage}
-                    {block:JumpPage}
-                        <a class="nav__posts__link nav__posts__link-jump" href="{URL}">{PageNumber}</a>
-                    {/block:JumpPage}
-                {/block:JumpPagination}
-                {block:NextPage}<a aria-label="See older posts" class="nav__posts__link-next" href="{NextPage}">Past &gt;</a>{/block:NextPage}
+                <h1 class="nav__posts__heading">{Text:Post navigation title}</h1>
+                <div class="nav__posts__links">
+                    {block:PreviousPage}
+                        <div class="nav__posts__links-future">
+                            <a aria-label="Jump to newest page" class="nav__posts__link nav__posts__link-first" href="{BlogURL}">&laquo;</a>
+                            <a aria-label="{lang:Newer posts}" class="nav__posts__link nav__posts__link-prev" href="{PreviousPage}">&lsaquo;</a>
+                        </div>
+                    {/block:PreviousPage}
+                    {block:JumpPagination length="3"}
+                        {block:CurrentPage}
+                            <span aria-current="page" class="nav__posts__link nav__posts__link-current">{PageNumber}</span>
+                        {/block:CurrentPage}
+                        {block:JumpPage}
+                            <a class="nav__posts__link nav__posts__link-jump" href="{URL}">{PageNumber}</a>
+                        {/block:JumpPage}
+                    {/block:JumpPagination}
+                    {block:NextPage}
+                        <div class="nav__posts__links-past">
+                            <a aria-label="{lang:Older posts}" class="nav__posts__link nav__posts__link-next" href="{NextPage}">&rsaquo;</a>
+                            <a aria-label="Jump to last page" class="nav__posts__link nav__posts__link-last" href="/page/{TotalPages}">&raquo;</a>
+                        </div>
+                    {/block:NextPage}
+                </div>
             </nav>
         {/block:Pagination}
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var photosetPics = document.getElementsByClassName('photoset__img');
+            /* Remove post header on pages */
+            var notPost = document.getElementById('post-');
+            if ( notPost !== null ) {
+                notPost.firstElementChild.style.display = 'none';
+            }
+            /* Add accessible markup to Photosets */
+            var photosetPics = document.getElementsByClassName('photoset__fig');
             var imgOrCaption, caption, img, imgSrc, figId;
             for ( var i = 0; i < photosetPics.length; i++ ) {
                 imgOrCaption = photosetPics[i].lastElementChild;
@@ -254,6 +296,7 @@
                     img.setAttribute( 'aria-labelledby', figId );
                 }
             }
+            /* Add a class to notes from blog author */
             var postNotes = document.getElementsByClassName('note');
             for ( var i = 0; i < postNotes.length; i++ ) {
                 if ( postNotes[i].firstElementChild.getAttribute('href') == '{BlogURL}' ) {

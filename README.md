@@ -1,7 +1,7 @@
 # Little Aspect
-A lightweight pink and purple Tumblr theme based on Zoe, the awesome-awesomest champion in League of Legends ever. It's the perfect theme if you're into vaporwave and sunset colors. Check it out!
+![Thumbnail of the theme for the Tumblr theme garden.](https://github.com/prestobunny/little-aspect/blob/master/preview/thumbnail.jpg)
 
-https://littleaspecttheme.tumblr.com/
+A lightweight pink and purple Tumblr theme based on Zoe, the awesome-awesomest champion in League of Legends ever. It's the perfect theme if you're into vaporwave and sunset colors. [Check out the demo site!](https://littleaspecttheme.tumblr.com/)
 
 Little Aspect has a chunky pink left-hand sidebar on wide screens which moves to the top of the page on smaller screens.
 
@@ -11,6 +11,11 @@ Little Aspect has a chunky pink left-hand sidebar on wide screens which moves to
 - Accessibility-ready to the best of my ability!
 
 Aspect of Twilight not included.
+
+## Screenshots
+<img alt="A screenshot of Little Aspect showing the sidebar-content layout" src="https://github.com/prestobunny/little-aspect/blob/master/preview/screenshot1.jpg" width="300" style="float:left;" />
+
+<img alt="A screenshot of Little Aspect showing the full-width layout for smaller screens." src="https://github.com/prestobunny/little-aspect/blob/master/preview/screenshot2.jpg" width="300" />
 
 ## Notes
 ### How to hide the theme credit
@@ -57,4 +62,8 @@ Initial release
 - Centered photo elements that are smaller than the post width
 
 ## License
-Little Aspect theme code is released under the MIT license. Basically do whatever you want with it. The two glitter images used in post headers/footers are public domain. The "like" and "reblog" icon SVGs used in the post actions bar and next to permalink page notes belong to Tumblr.
+Little Aspect theme code is released under the MIT license. Basically do whatever you want with it. The two glitter images used in post headers/footers are public domain.
+
+The "like" and "reblog" icon SVGs used in the post actions bar and next to permalink page notes belong to Tumblr.
+
+Any content used on the demo site belongs to its respective owners.
